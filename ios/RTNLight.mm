@@ -6,19 +6,15 @@
 
 RCT_EXPORT_MODULE()
 
-- (void)add:(double)a b:(double)b resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
-    NSNumber *result = [[NSNumber alloc] initWithInteger:a+b];
-    resolve(result);
-}
 
-- (void)sub:(double)a b:(double)b resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
-    NSNumber *result = [[NSNumber alloc] initWithInteger:a-b];
-    resolve(result);
-}
-
-- (void) turnLightOn
+- (void) switchOn
 {
     [self on:true];
+}
+
+- (void) switchOff
+{
+    [self on:false];
 }
 
 - (void) on:(bool) on
@@ -36,6 +32,21 @@ RCT_EXPORT_MODULE()
         }
     }
 }
+
+- (bool) isLightActive
+{
+    if ([AVCaptureDevice class]) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch]){
+            return [device isTorchActive];
+        }else{
+            return false;
+        }
+    }
+    return false;
+}
+
+
 
 - (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
     (const facebook::react::ObjCTurboModule::InitParams &)params

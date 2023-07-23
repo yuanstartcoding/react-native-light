@@ -47,13 +47,13 @@ import Light from 'react-native-light';
 2. Toggle the flashlight on:
 
 ```javascript
-Light.turnLightOn();
+Light.switchOn();
 ```
 
 3. Toggle the flashlight off:
 
 ```javascript
-Light.turnLightOn();
+Light.switchOff();
 ```
 
 ## Example
@@ -66,18 +66,18 @@ import { View, Button } from 'react-native';
 import Light from 'rtn-light/js/NativeLight';
 
 const FlashlightScreen = () => {
-  const toggleFlashlight = () => {
-    Light.turnLightOn();
+  const turnOnFlashlight = () => {
+    Light.switchOn();
   };
 
   const turnOffFlashlight = () => {
-    Light.turnLightOn();
+    Light.switchOff();
   };
 
   return (
     <View>
-      <Button title="Toggle Flashlight" onPress={toggleFlashlight} />
-      <Button title="Turn Off Flashlight" onPress={turnOffFlashlight} />
+      <Button title="Switch on" onPress={turnOnFlashlight} />
+      <Button title="Switch off" onPress={turnOffFlashlight} />
     </View>
   );
 };

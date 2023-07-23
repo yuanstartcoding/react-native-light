@@ -42,17 +42,18 @@ public class LightModule extends NativeLightSpec {
             String cameraId = camManager.getCameraIdList()[0];
             promise.resolve(camManager.getCameraCharacteristics(cameraId));
         } catch (Exception e) {
-            promise.reject("FLASH_ERROR", e.getMessage());
+//             promise.reject("FLASH_ERROR", e.getMessage());
+            promise.reject("FLASH_ERROR");
         }
     }
 
     @ReactMethod
-    public void turnLightOn() {
+    public void switchOn() {
         toggleFlash(true);
     }
 
     @ReactMethod
-    public void turnLightOff() {
+    public void switchOff() {
         toggleFlash(false);
     }
 
@@ -61,7 +62,7 @@ public class LightModule extends NativeLightSpec {
             CameraManager camManager = (CameraManager) context.getSystemService(context.CAMERA_SERVICE);
             String cameraId = camManager.getCameraIdList()[0];
             camManager.setTorchMode(cameraId, enable);
-            sendEvent(context, enable ? "onLightTurnedOn" : "onLightTurnedOff");
+            sendEvent(context, enable ? "onSwitchOn" : "onSwitchOff");
         } catch (Exception e) {
             e.printStackTrace();
         }
